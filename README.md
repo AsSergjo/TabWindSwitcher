@@ -8,15 +8,9 @@
 -   **Alt+~ (Alt + Tilde):** When you press `Alt + ~`, the switcher will display and allow you to select **all currently running programs** (applications). This means you can switch between different instances of the same application (e.g., multiple Notepad windows, multiple browser windows).
 -   **Alt+Tab:** When you press `Alt + Tab`, the switcher will display and allow you to select **only the main application windows**, effectively grouping instances of the same application. This mimics the behavior often found in some Linux desktop environments where Alt+Tab cycles through applications rather than individual windows.
 
-## Screenshot
+## Demonstration
 
-Here's a preview of `TabWindSwitcher` in action:
-
-![TabWindSwitcher Screenshot](assets/1.jpg)
-
-## Video Demonstration
-
-[![Демо видео](assets/output_1.mp4)](assets/output_1.mp4)
+![TabWindSwitcher Demonstration](assets/output.gif)
 
 ## How it Works
 
