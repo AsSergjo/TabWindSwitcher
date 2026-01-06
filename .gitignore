@@ -1,0 +1,10 @@
+# Build artifacts
+*.exe
+*.obj
+*.res
+
+# IDE-specific files
+.vscode/
+
+# User-specific configuration (optional)
+# TabWindSwitcher.ini
