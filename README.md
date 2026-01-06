@@ -16,7 +16,7 @@ Here's a preview of `TabWindSwitcher` in action:
 
 ## Video Demonstration
 
-<video controls src="assets/output_1.mp4" title="TabWindSwitcher Demo"></video>
+[![Демо видео](assets/output_1.mp4)](assets/output_1.mp4)
 
 ## How it Works
 
