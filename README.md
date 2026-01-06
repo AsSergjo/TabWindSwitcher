@@ -14,6 +14,10 @@ Here's a preview of `TabWindSwitcher` in action:
 
 ![TabWindSwitcher Screenshot](assets/1.jpg)
 
+## Video Demonstration
+
+<video controls src="assets/output_1.mp4" title="TabWindSwitcher Demo"></video>
+
 ## How it Works
 
 The program intercepts the standard Alt+Tab shortcut and provides its own overlay for window selection. It distinguishes between individual window instances and main application groups, offering two distinct switching modes via `Alt+~` and `Alt+Tab`.
