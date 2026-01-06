@@ -16,9 +16,7 @@ Here's a preview of `TabWindSwitcher` in action:
 
 ## Video Demonstration
 
-Click the image below to watch a video demonstration:
-
-[![TabWindSwitcher Demo](assets/1.jpg)](https://github.com/AsSergjo/TabWindSwitcher/blob/main/assets/output_1.mp4)
+<video controls src="assets/output_1.mp4" title="TabWindSwitcher Demo"></video>
 
 ## How it Works
 
