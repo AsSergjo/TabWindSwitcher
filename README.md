@@ -7,6 +7,7 @@
 -   **Linux-style Alt+Tab replacement:** This tool replaces the default Windows Alt+Tab behavior with a more versatile switcher.
 -   **Alt+~ (Alt + Tilde):** When you press `Alt + ~`, the switcher will display and allow you to select **all currently running programs** (applications). This means you can switch between different instances of the same application (e.g., multiple Notepad windows, multiple browser windows).
 -   **Alt+Tab:** When you press `Alt + Tab`, the switcher will display and allow you to select **only the main application windows**, effectively grouping instances of the same application. This mimics the behavior often found in some Linux desktop environments where Alt+Tab cycles through applications rather than individual windows.
+-   **Multi‑row layout:** When many windows are open, the switcher automatically arranges icons into multiple rows, keeping the overlay compact and centered on screen. No more horizontal scrolling or off‑screen items.
 
 ## Demonstration
 
@@ -37,3 +38,14 @@ To have `TabWindSwitcher` launch automatically when Windows starts, you can add 
 ## Building from Source
 
 *(Information on how to compile `TabWindSwitcher.cpp` using `build.bat` or other means would be placed here.)*
+
+## Changelog
+
+### 2026‑01‑12
+- **Added multi‑row layout** – icons now wrap to multiple rows when there are many windows, preventing the overlay from exceeding screen width.
+- **Code cleanup** – streamlined data structures and improved layout calculations.
+
+### 2025‑12‑01
+- Initial release with Alt+Tab and Alt+~ switching modes.
+- Configurable transparency via INI file.
+- Single‑instance enforcement.

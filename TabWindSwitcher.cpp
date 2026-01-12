@@ -39,6 +39,8 @@ HANDLE g_hMutex = NULL; // Mutex for single instance
 std::vector<WindowInfo> g_windowList;
 size_t g_selectedIndex = 0;
 bool g_isSingleAppMode = false;
+size_t g_iconsPerRow = 0;
+size_t g_rows = 0;
 
 const wchar_t MAIN_CLASS_NAME[] = L"TabWindSwitcherMainClass";
 const wchar_t SWITCHER_CLASS_NAME[] = L"TabWindSwitcherUIClass";
@@ -200,6 +202,8 @@ LRESULT CALLBACK SwitcherWndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPa
             g_windowList.clear();
             g_hSwitcherWnd = NULL;
             g_isSingleAppMode = false;
+            g_iconsPerRow = 0;
+            g_rows = 0;
             return 0;
         }
     }
@@ -240,12 +244,14 @@ void UpdateSwitcherLayeredWindow(HWND hwnd) {
 
     int itemContentWidth = 128;
     int itemCellWidth = itemContentWidth + PADDING;
-    int contentWidth = static_cast<int>(itemCellWidth * g_windowList.size() - PADDING);
+    int contentWidth = static_cast<int>(g_iconsPerRow * itemCellWidth - PADDING);
     int startX = (width - contentWidth) / 2;
 
     for (size_t i = 0; i < g_windowList.size(); ++i) {
-        int x = static_cast<int>(startX + i * itemCellWidth);
-        int y = PADDING;
+        size_t row = i / g_iconsPerRow;
+        size_t col = i % g_iconsPerRow;
+        int x = static_cast<int>(startX + col * itemCellWidth);
+        int y = static_cast<int>(PADDING + row * (ICON_SIZE + TITLE_HEIGHT + PADDING));
 
         if (i == g_selectedIndex) {
             Gdiplus::GraphicsPath selectionPath;
@@ -323,10 +329,19 @@ void ShowSwitcher(bool filterByProcess) {
         
         int itemContentWidth = 128;
         int itemCellWidth = itemContentWidth + PADDING;
-        int contentWidth = static_cast<int>(itemCellWidth * g_windowList.size() - PADDING);
-        int windowWidth = static_cast<int>(contentWidth + 2 * PADDING);
-        int windowHeight = ICON_SIZE + TITLE_HEIGHT + PADDING * 2;
         
+        // Calculate maximum icons per row based on screen width (90% of screen)
+        int maxIconsPerRow = static_cast<int>((screenWidth * 0.9 - 2 * PADDING) / itemCellWidth);
+        if (maxIconsPerRow < 1) maxIconsPerRow = 1;
+        
+        g_iconsPerRow = (g_windowList.size() < (size_t)maxIconsPerRow) ? g_windowList.size() : (size_t)maxIconsPerRow;
+        g_rows = (g_windowList.size() + g_iconsPerRow - 1) / g_iconsPerRow;
+        
+        int contentWidth = static_cast<int>(g_iconsPerRow * itemCellWidth - PADDING);
+        int windowWidth = static_cast<int>(contentWidth + 2 * PADDING);
+        int windowHeight = static_cast<int>(g_rows * (ICON_SIZE + TITLE_HEIGHT + PADDING) + PADDING);
+        
+        // Ensure window doesn't exceed screen width (already limited by maxIconsPerRow)
         if (windowWidth > screenWidth * 0.9) windowWidth = (int)(screenWidth * 0.9);
 
         int x = screenX + (screenWidth - windowWidth) / 2;
@@ -479,6 +494,7 @@ BOOL CALLBACK EnumWindowsProc(HWND hwnd, LPARAM lParam) {
     
     return TRUE;
 }
+
 
 void AddRoundRectToPath(Gdiplus::GraphicsPath& path, Gdiplus::RectF rect, Gdiplus::REAL radius) {
     if (radius <= 0.0f) {
